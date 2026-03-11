@@ -1,0 +1,320 @@
+:root {
+  color-scheme: light;
+
+  /* Spacing Reference ------------------
+
+  2xs (12):
+  tube py
+  tube gx
+
+  xs (20):
+  tube gap
+  tube px
+
+  sm (32):
+  content base p
+  content base gy
+
+  base (48):
+  page px
+  content base g
+
+  lg (64):
+  container row g
+  content lg g
+
+  xl (96):
+  main gy
+  container gx
+  content lg p
+
+  */
+
+  /* Font sizes -------------------------------------------------------------------------------------------------------------------------- */
+  --icon-size: 1.45em;
+  --body-sm--font-size: 17.5px;
+  --body-base--font-size: 19px;
+  --body-lg--font-size: 20px;
+  --heading-sm--font-size: 21px;
+  --heading-base--font-size: 24px;
+  --heading-lg--font-size: 36px;
+
+  @media screen and (min-width: 600px) {
+    --body-sm--font-size: 18px;
+    --body-base--font-size: 20.5px;
+    --body-lg--font-size: 23px;
+    --heading-sm--font-size: 22.5px;
+    --heading-base--font-size: 26px;
+    --heading-lg--font-size: 64px;
+  }
+
+  @media screen and (min-width: 850px) {
+    --body-sm--font-size: 21.5px;
+    --body-base--font-size: 24px;
+    --body-lg--font-size: 26px;
+    --heading-xs--font-size: 24px;
+    --heading-sm--font-size: 28px;
+    --heading-base--font-size: 34px;
+    --heading-lg--font-size: 62px;
+  }
+
+  /* Spacings -------------------------------------------------------------------------------------------------------------------------- */
+  --space-none: 0;
+  --space-2xs: 0.5rem;
+  --space-xs: 1rem;
+  --space-sm: 1.5rem;
+  --space-base-x: 1rem;
+  --space-base-y: 2rem;
+  --space-lg: 3rem;
+  --space-xl: 4rem;
+
+  @media screen and (min-width: 600px) {
+    --space-none: 0;
+    --space-2xs: 0.75rem;
+    --space-xs: 1.25rem;
+    --space-sm: 2rem;
+    --space-base-y: 3rem;
+    --space-base-x: 3rem;
+    --space-lg: 4rem;
+    --space-xl: 6rem;
+  }
+
+  @media screen and (min-width: 850px) {
+  }
+
+  /* Sizes -------------------------------------------------------------------------------------------------------------------------- */
+  --size-tube-sm: 2.5rem;
+  --size-tube-base: 3rem;
+  --size-tube-lg: 3.5rem;
+
+  @media screen and (min-width: 600px) {
+    --size-tube-sm: 2.75rem;
+    --size-tube-base: 3.25rem;
+    --size-tube-lg: 3.75rem;
+  }
+
+  @media screen and (min-width: 850px) {
+    --size-tube-sm: 2.75rem;
+    --size-tube-base: 3.5rem;
+    --size-tube-lg: 4rem;
+  }
+}
+
+@theme inline {
+  /* Breakpoints ----------------------------------------------------------------------------------------------------------------------- */
+
+  --breakpoint-xs: 450px; /* Only for stuff that needs to change on really small screens */
+  --breakpoint-sm: 600px; /* The limit for "mobile" styles */
+  --breakpoint-md: 850px; /* Usually the last point I start changing sizes */
+  --breakpoint-lg: 1040px;
+  --breakpoint-xl: 1120px;
+
+  /* Typography ------------------------------------------------------------------------------------------------------------------------ */
+
+  --font-display: Assistant;
+  --font-body: Assistant;
+  --font-icon: "Material Symbols Sharp";
+  --font-weight-icon: 300;
+
+  --text-body-sm: var(--body-sm--font-size);
+  --text-body-sm--line-height: 1.4;
+  --text-body-base: var(--body-base--font-size);
+  --text-body-base--line-height: 1.45;
+  --text-body-base--letter-spacing: -0.005em;
+  --text-body-lg: var(--body-lg--font-size);
+  --text-body-lg--line-height: 1.4;
+  --text-body-lg--letter-spacing: -0.005em;
+
+  --text-heading-xs: var(--heading-xs--font-size);
+  --text-heading-xs--line-height: 1.2;
+  --text-heading-sm: var(--heading-sm--font-size);
+  --text-heading-sm--line-height: 1.3;
+  --text-heading-base: var(--heading-base--font-size);
+  --text-heading-base--line-height: 1.3;
+  --text-heading-lg: var(--heading-lg--font-size);
+  --text-heading-lg--line-height: 1.1;
+  --text-heading-lg--letter-spacing: -0.02em;
+
+  /* Color ----------------------------------------------------------------------------------------------------------------------------- */
+
+  --color-*: initial;
+  --color-current: currentColor;
+  --color-inherit: inherit;
+  --color-transparent: transparent;
+
+  /* Text ------------------------------------ */
+
+  --color-t-neutral: var(--color-slate);
+  --color-t-neutral-light: var(--color-slate-light);
+
+  --color-t-action: var(--color-blue);
+  --color-t-warning: var(--color-red);
+
+  --color-t-red: var(--color-red-light);
+
+  /* Border ------------------------------------ */
+
+  --color-border-neutral: var(--color-slate-lighter);
+
+  /* Background ------------------------------------ */
+
+  --color-bg-neutral: var(--color-slate-lightest);
+
+  --color-bg-surface: var(--color-slate-lightest);
+
+  --color-bg-blue: var(--color-blue-light);
+  --color-bg-blue-light: var(--color-blue-lighter);
+
+  /* Container ------------------------------------------------------------------------------------------------------------------------- */
+
+  --container-*: initial;
+  --container-narrow: 56rem;
+  --container-base: 91.5rem;
+  --container-content: 61ch;
+
+  /* Elevation --------------------------------------------------------------------------------------------------------------------------*/
+
+  --z-lowered: -10;
+  --z-elevated: 20;
+  --z-sticky: 30;
+  --z-top: 40;
+  --z-top-elevated: 50;
+
+  /* Effects --------------------------------------------------------------------------------------------------------------------------- */
+
+  --shadow-*: initial;
+  --blur-*: initial;
+
+  /* Spacing --------------------------------------------------------------------------------------------------------------------------- */
+
+  --spacing-inherit: inherit;
+  --spacing-cqi: 100cqi;
+  --spacing-navbar-height: var(--space-navbar-height);
+  --spacing-dvh--navbar: calc(100dvh - var(--space-navbar-height));
+  --spacing-indent: 1.5ch;
+
+  --spacing-2xs: var(--space-2xs);
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-base-x: var(--space-base-x);
+  --spacing-base-y: var(--space-base-y);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+
+  /* Aspect ratio ---------------------------------------------------------------------------------------------------------------------- */
+
+  --aspect-square: 1;
+
+  /* Tube ------------------------------------------------------------------------------------------------------------------------------ */
+
+  --spacing-tube-sm: var(--size-tube-sm);
+  --spacing-tube-base: var(--size-tube-base);
+  --spacing-tube-lg: var(--size-tube-lg);
+
+  /* Radii ----------------------------------------------------------------------------------------------------------------------------- */
+
+  --radius-*: initial;
+  --radius-sm: calc(var(--size-tube-sm) * 0.15);
+  --radius-base: calc(var(--size-tube-base) * 0.15);
+  --radius-lg: calc(var(--size-tube-lg) * 0.15);
+  --radius-square: 160px;
+
+  /* Animations ------------------------------------------------------------------------------------------------------------------------ */
+
+  --ease-*: initial;
+  --default-transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --default-transition-duration: 100ms;
+  --animate-marquee: marquee var(--animate-duration, 1s) infinite linear;
+  --animate-spin: spin var(--animate-duration, 1s) infinite linear;
+  --animate-wave: wave var(--animate-duration, 1s) infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes wave {
+    0%,
+    50%,
+    100% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-1rem);
+    }
+    75% {
+      transform: translateY(1rem);
+    }
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(359deg);
+    }
+  }
+}
+
+@utility animate-duration-* {
+  --animate-duration: calc(--value(integer) * 1s);
+}
+
+@utility grid-overlap {
+  & > * {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+  }
+}
+
+@utility gap-inherit {
+  gap: inherit;
+}
+
+@utility text-icon {
+  transform-origin: top;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  font-family: var(--font-icon);
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  text-decoration: none !important;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" var(--font-weight-icon),
+    "GRAD" 0;
+}
+
+@utility bg-* {
+  background-color: --value(--color-bg-*);
+}
+@utility border-* {
+  border-color: --value(--color-border-*);
+}
+@utility text-* {
+  color: --value(--color-t-*);
+  line-height: --value(--text-* --line-height);
+}
+
+@utility text-heading-* {
+  font-weight: 600;
+}
+@utility text-body-* {
+  font-weight: 550;
+}
+
+@layer utilities {
+  [x-cloak] {
+    display: none !important;
+  }
+}

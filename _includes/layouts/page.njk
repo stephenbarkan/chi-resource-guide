@@ -1,0 +1,26 @@
+{% extends "layouts/base.njk" %}
+
+{# Nested Components ------------------------------------------------------------------------------------------------------------------- #}
+
+{# Values ------------------------------------------------------------------------------------------------------------------------------ #}
+
+{% set title = data.title %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+
+{% block content %}
+
+    {# page title #}
+    {% call section({}, {class:"py-xl"}) %}
+        {% call container({size: "base", type: "cols-1"}) %}
+            {{ textLockup({
+                title: data.title,
+                elaboration: data.elaboration,
+                button: data.button
+            }) }}
+        {% endcall %}
+    {% endcall %}
+
+    {% block pageContent %}{% endblock %}
+
+{% endblock %}

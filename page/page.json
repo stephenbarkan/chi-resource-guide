@@ -1,0 +1,8 @@
+{
+  "ogType": "page",
+  "date": "Last Modified",
+  "ogImage": "/og-image.jpg",
+  "permalink": "/{{ page.fileSlug }}/",
+  "tags": ["page"],
+  "showNavbar": true
+}

@@ -1,0 +1,154 @@
+{# Nested Components ------------------------------------------------------------------------------------------------------------------- #}
+
+{% from "snippets/loopAttrs.njk" import loopAttrs %}
+{% from "components/icon.njk" import icon %}
+
+{# Macro ------------------------------------------------------------------------------------------------------------------------------- #}
+
+{% macro button(props={},attrs={}) %}
+
+{# Values ----------- #}
+
+{% set buttonWrapperStyles = {
+    shared: "shadow-depth translate-y-[6px]",
+    sizes: {
+        base: "rounded-base",
+        sm: "rounded-sm",
+        lg: "rounded-lg",
+        xl: "rounded-lg"
+    },
+    variants: {
+        primary: "bg-action",
+        secondary: "bg-grey"
+    }
+} %}
+
+{% set buttonStyles = {
+    shared: "transition-transform decoration-[1.5px] underline-offset-3",
+    button: {
+        styles: "shadow-highlight hover:underline translate-y-[-6px] hover:translate-y-[-5px] active:translate-y-[-2px] ease-spring duration-350",
+        on: "translate-y-[-2px]!",
+        sizes: {
+            base: "text-button-base min-w-tube-base min-h-tube-base rounded-base gap-xs px-xs py-2xs",
+            sm: "text-body-base min-h-tube-sm min-w-tube-sm rounded-sm gap-2xs px-xs py-2xs",
+            lg: "text-body-lg min-h-tube-lg min-w-tube-lg rounded-lg gap-xs px-xs py-2xs",
+            xl: "text-heading-sm min-h-tube-xl min-w-tube-xl rounded-lg gap-sm px-sm py-2xs"
+        },
+        variants: {
+            primary: "text-neutral bg-action-light hover:bg-action-lighter border border-neutral",
+            secondary: "text-neutral bg-neutral-lighter hover:bg-neutral-lightest border border-neutral"
+        }
+    },
+    link: {
+        styles: "",
+        on: "",
+        sizes: {
+            inherit: "",
+            sm: "text-body-sm gap-1.5",
+            base: "text-body-base gap-2",
+            lg: "text-body-lg gap-2",
+            xl: "text-heading-sm gap-2"
+        },
+        variants: {
+            underline:"text-action underline hover:no-underline",
+            neutral:"text-neutral no-underline hover:underline",
+            surface: "text-surface no-underline hover:underline"
+        }
+    }
+} %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+
+<{% if attrs.href %}a{% else %}button{% endif %} data-button
+    {% if props.toggleValue %}
+        {% if not props.label %}:aria-label="{{ props.toggleValue}} ? '{{ props.tooltip.on }}' : '{{ props.tooltip.off }}'"{% endif %}
+        :title="{{ props.toggleValue }} ? '{{ props.tooltip.on }}' : '{{ props.tooltip.off }}'"
+    {% else %}
+        {% if props.tooltip %}
+            {% if not props.label %}aria-label="{{ props.tooltip }}"{% endif %}
+            title="{{ props.tooltip }}"
+        {% endif %}
+    {% endif %}
+    {{ loopAttrs(attrs) }}
+    class="inline-flex shrink-0 disabled:opacity-60 cursor-pointer items-center
+    {% if props.type === "button" %}
+        {{ buttonWrapperStyles.shared }}
+        {{ buttonWrapperStyles.sizes[props.size] }}
+        {{ buttonWrapperStyles.variants[props.variant] }}
+    {% endif %}
+    {{ attrs.class }}
+    {% if attrs.disabled %}pointer-events-none{% endif %}">
+
+
+    <div class="w-full h-full flex justify-center items-center
+        {{ buttonStyles[props.type].styles }}
+        {{ buttonStyles[props.type].sizes[props.size] }}
+        {{ buttonStyles[props.type].variants[props.variant] }}
+        {{ buttonStyles.shared }}"
+        {% if props.toggleValue %}
+            {% if buttonStyles[props.type].on %}
+                :class="{{ props.toggleValue }} && '{{ buttonStyles[props.type].on }}'"
+            {% endif %}
+        {% endif %}>
+
+        {% if props.toggleValue %}
+            <span class="flex items-center justify-center pointer-events-none gap-inherit {% if props.iconPosition === "end" %}flex-row-reverse{% endif %}">
+                {% if props.icon %}
+                    {% set show %}{{ props.toggleValue }} == false {% endset %}
+                    {{ icon({glyph:props.icon.off}, {"x-show":show}) }}
+                    {% set show %}{{ props.toggleValue }} == true {% endset %}
+                    {{ icon({glyph:props.icon.on}, {"x-show":show}) }}
+                {% endif %}
+                {% if props.label %}
+                    <span x-show="!{{ props.toggleValue }}" class="">{{ props.label.off }}</span>
+                    <span x-show="{{ props.toggleValue }}" class="">{{ props.label.on }}</span>
+                {% endif %}
+            </span>
+        {% else %}
+            {% if props.icon or props.label %}
+                <span class="flex items-center justify-center pointer-events-none gap-inherit {% if props.iconPosition === "end" %}flex-row-reverse{% endif %}">
+                    {% if props.icon %}
+                        {{ icon({glyph:props.icon}) }}
+                    {% endif %}
+                    {% if props.label %}
+                        <span class="">{{ props.label }}</span>
+                    {%- endif -%}
+                </span>
+            {% endif %}
+        {% endif %}
+
+        {%- if not props.label and not props.icon -%}
+            {% if caller %}
+                {{ caller() | safe }}
+            {% endif %}
+        {%- endif -%}
+
+    {% if buttonWrapperStyles and props.type === "button" %}
+        </div>
+    {% endif %}
+
+</{% if attrs.href %}a{% else %}button{% endif %}>
+
+{% endmacro %}
+
+{# Component Documentation ------------------------------------------------------------------------------------------------------------- #}
+
+{% set buttonMeta = {
+    args: '{{ button(
+    props={
+        label: "",
+        icon: "",
+        tooltip: ""
+        type: "button | link",
+        size: "base | lg | sm | inherit",
+        toggleValue: "",
+        iconPosition: "start | end"
+    },
+    attrs={}
+) }}',
+description: "
+- Tag defaults to `button` unless you provide an `attrs.href`, then it'll be an `a` tag.
+- Optionally you can use `{% call %}` to give custom inner HTML.
+- `props.toggleValue` is the `x-data` value that the button looks for to determine its on/off state. If you use this property, the `button` expects the `props.icon` and `props.label` values to be objects with `on` and `off` keys.
+"
+} %}

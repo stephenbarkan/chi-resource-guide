@@ -1,0 +1,13 @@
+:root {
+  --color-slate: #002939;
+  --color-slate-light: #405158;
+  --color-slate-lighter: #b5bec1;
+  --color-slate-lightest: #fefdfd;
+
+  --color-red: #d80d0d;
+  --color-red-light: #e4002b;
+
+  --color-blue: #006b99;
+  --color-blue-light: #41b6e6;
+  --color-blue-lighter: #e9f7ff;
+}

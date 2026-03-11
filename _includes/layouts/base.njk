@@ -1,0 +1,105 @@
+{# Imports ----------------------------------------------------------------------------------------------------------------------------- #}
+
+{% from "components/section.njk" import section %}
+{% from "components/container.njk" import container %}
+{% from "components/announcementBanner.njk" import announcementBanner with context %}
+{% from "components/toaster.njk" import toaster %}
+{% from "components/button.njk" import button %}
+{% from "components/textLockup.njk" import textLockup %}
+{% from "components/divider.njk" import divider %}
+{# {% from "assets.njk" import logo %} #}
+
+{# Values ------------------------------------------------------------------------------------------------------------------------------ #}
+
+{# Theme Values ------------------ #}
+
+{% set htmlStyles = "scroll-smooth scroll-p-lg" %}
+{% set bodyStyles = "bg-surface font-body text-neutral text-body-base antialiased flex flex-col min-h-dvh w-screen overflow-x-hidden items-center pb-[calc(env(safe-area-inset-bottom)+var(--announcementBannerBlockSize))]" %}
+
+{# Other ------------------ #}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+
+<!DOCTYPE html>
+<html
+    {% if showNavbar %} {# checks if the layout template includes the navbar or not #}
+        x-data="{
+            scrollable: true,
+            navbarHidden: false,
+            navbarHeight: 0,
+            lastScrollY: 0,
+            hasScrolled: false,
+            setHasScrolled() {
+                if (window.scrollY > 0) {
+                    this.hasScrolled = true
+                } else {
+                    this.hasScrolled = false
+                }
+            },
+            setNavbarHeight() {
+                setTimeout(() => {
+                    if (this.navbarHidden) {
+                        this.navbarHeight = 0;
+                    } else {
+                        this.navbarHeight = document.querySelector(`[x-ref='navbar']`).offsetHeight;
+                    }
+                }, 100);
+            },
+            setNavbarVisibility() {
+                if (window.scrollY === 0) {
+                    this.navbarHidden = false
+                } else if (window.scrollY > this.lastScrollY && this.hasScrolled) { //scrolling down
+                    this.navbarHidden = true
+                } else if (window.scrollY < this.lastScrollY  && this.hasScrolled) { //scrolling up
+                    this.navbarHidden = false
+                }
+                this.setNavbarHeight()
+                this.setHasScrolled()
+                this.lastScrollY = window.scrollY
+            },
+            init() { {# sets navbar height on js load #}
+                this.setNavbarHeight()
+            }
+        }"
+        x-effect="setNavbarHeight()"
+        @resize.window="setNavbarHeight()"
+        @scroll.window="setNavbarVisibility()"
+        :style="{'--space-navbar-height': navbarHeight + 'px'}"
+    {% endif %}
+    lang="en"
+    class="relative {{ htmlStyles }}">
+
+    <head>
+        {% include "snippets/htmlHead.njk" %}
+    </head>
+
+    <body
+        :class="!scrollable && 'overflow-y-hidden'"
+        class="{{ bodyStyles }}">
+
+        {# Skip to content link #}
+        <a class="absolute top-0 left-0 opacity-0 z-[-1111111]" href="#main" aria-label="skip to main content">Click to skip to main content</a>
+
+        {% if global.bannerContent %}
+            {{ announcementBanner({content: global.bannerContent }) }}
+        {% endif %}
+
+
+        {{ toaster() }}
+
+        <main id="main" class="@container flex flex-col justify-center w-full grow {{ mainStyles }}">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% block footer %}{% endblock %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+
+        {% if environment.env == 'dev' %}
+            {% include "components/_developmentWidget.njk" %}
+        {% endif %}
+
+        {% include "snippets/scripts.njk" %}
+
+    </body>
+</html>

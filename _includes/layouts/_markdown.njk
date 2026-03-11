@@ -1,0 +1,53 @@
+{% extends "layouts/base.njk" %}
+
+{# Nested Components ------------------------------------------------------------------------------------------------------------------- #}
+
+{% from "components/button.njk" import button %}
+{% from "components/markdown.njk" import markdown %}
+{% from "components/container.njk" import container %}
+{% from "components/sidebar.njk" import sidebar %}
+{% from "components/teb.njk" import teb %}
+{% from "components/navbar.njk" import navbar with context %}
+
+{# Values ------------------------------------------------------------------------------------------------------------------------------ #}
+
+{% set anchoredContent = content | attachId | attachAnchor %}
+{% set mainStyles = "" %}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+
+{% block content %}
+    {{ navbar({sticky: "true"}) }}
+    {% call section({},{class:"gap-lg pb-lg border-b max-md:pt-sm border-neutral bg-blue-light"}) %}
+        {% call container({size:"narrow", type: "cols-1", alignment: "left"}) %}
+            {{ teb({
+                size: "lg",
+                textAlignment: "left",
+                title: title,
+                elaboration: elaboration,
+                titleTag: "h1"
+        }, {}) }}
+        {% endcall %}
+    {% endcall %}
+    {% call section() %}
+        {% call container({size:"base", type:"sidebar"}, {class:"gap-base-x"}) %}
+            {% call sidebar() %}
+                    <section class="flex flex-col items-start gap-xs w-full py-lg">
+                        <h2 class="text-red font-semibold">Table of Contents</h2>
+                        {{ markdown({
+                            content: anchoredContent | toc | safe,
+                            overrides: {fontSize: "text-body-sm", scale:"2"}
+                        },{
+                            class:"w-full"
+                        })}}
+                    </section>
+            {% endcall %}
+            <div class="overflow-hidden justify-items-center py-lg">
+                {% call markdown({transform: false},{class:"w-full max-w-content"}) %}
+                    {{ anchoredContent | safe }}
+                {% endcall %}
+            </div>
+        {% endcall %}
+    {% endcall %}
+
+{% endblock %}

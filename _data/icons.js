@@ -1,0 +1,1 @@
+export default ["chevron_backward", "chevron_forward", "keyboard_arrow_down", "arrow_forward", "arrow_back", "vertical_align_top", "downloading", "bug_report", "close_small", "close", "add", "remove", "menu", "progress_activity"];

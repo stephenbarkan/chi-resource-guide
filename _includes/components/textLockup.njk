@@ -1,0 +1,41 @@
+{# Nested Components ------------------------------------------------------------------------------------------------------------------- #}
+
+{% from "snippets/loopAttrs.njk" import loopAttrs %}
+{% from "components/button.njk" import button %}
+{% from "components/markdown.njk" import markdown %}
+
+{# Macro ------------------------------------------------------------------------------------------------------------------------------- #}
+
+{% macro textLockup(props={}, attrs={}) %}
+
+{# Values ------------------------------------------------------------------------------------------------------------------------------ #}
+
+{% set headingStyles = "text-heading-base text-neutral text-center" %}
+
+{# Theme styles ----------- #}
+
+{% set textLockupStyles = "gap-8" %}
+
+{# Other ------------------ #}
+
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+
+<div data-textLockup
+    {{ loopAttrs(attrs) }}
+    class="flex flex-col items-center {{ attrs.class }} {{ textLockupStyles }}">
+    <h1 class="{{ headingStyles }}">{{ props.title }}</h1>
+    {% if props.elaboration %}
+        {{ markdown(
+            props={
+                content: props.elaboration,
+                transform: true
+            },
+            attrs={class:"w-full text-center"}
+        ) }}
+    {% endif %}
+    {% if props.button %}
+        {{ button(props.button.props, props.button.attrs) }}
+    {% endif %}
+</div>
+
+{% endmacro %}

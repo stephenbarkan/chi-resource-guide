@@ -901,6 +901,10 @@
   .delay-100 {
     transition-delay: 100ms;
   }
+  .duration-0 {
+    --tw-duration: 0ms;
+    transition-duration: 0ms;
+  }
   .duration-200 {
     --tw-duration: 200ms;
     transition-duration: 200ms;

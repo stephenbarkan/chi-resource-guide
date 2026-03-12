@@ -14,7 +14,7 @@
 
 {% set drawerStyles = "w-full h-dvh overflow-hidden pb-safe-area-bottom" %} {# applied to the wrapper for the panel #}
 {% set panelStyles = "@container content-center bg-surface border-t border-x border-neutral rounded-t-base p-2xs" %}
-{% set backdropStyles = "bg-black opacity-50" %}
+{% set backdropStyles = "bg-black opacity-50 transition-opacity" %}
 {% set durationEnter = "duration-250" %}
 {% set durationLeave = "duration-250" %}
 
@@ -79,7 +79,7 @@
         <div {# wrapper for panel, teleported to the body #}
             x-cloak
             x-ref="drawer"
-            x-show="drawerOpen"
+            :class="{'invisible': !drawerOpen}"
             class="flex z-(--z-top) grow fixed overflow-y-auto transition {{ drawerStyles }} {{ drawerAlignmentStyles }}">
 
             {# Panel – thing that transitions #}
@@ -87,8 +87,8 @@
             tabindex="-1"
                 x-ref="panel"
                 x-show="drawerOpen"
-                x-transition:enter-start="{{ transitionStyles }}"
                 x-transition:enter="{{ durationEnter }}"
+                x-transition:enter-start="{{ transitionStyles }}"
                 x-transition:leave="{{ durationLeave }}"
                 x-transition:leave-end="{{ transitionStyles }}"
                 @click="if($event.target !== $refs.panel && $event.target.parentNode.tagName.toLowerCase() === 'a') { close($refs.button) }"
@@ -105,7 +105,7 @@
                 x-show="drawerOpen"
                 x-transition:enter="{{ durationEnter }}"
                 x-transition:enter-start="opacity-0"
-                x-transition:enter="{{ durationLeave }}"
+                x-transition:leave="{{ durationLeave }}"
                 x-transition:leave-end="opacity-0"
                 class="absolute inset-0 z-(--z-lowered) {{ backdropStyles }}">
             </div>

@@ -1,35 +1,6 @@
 :root {
   color-scheme: light;
 
-  /* Spacing Reference ------------------
-
-  2xs (12):
-  tube py
-  tube gx
-
-  xs (20):
-  tube gap
-  tube px
-
-  sm (32):
-  content base p
-  content base gy
-
-  base (48):
-  page px
-  content base g
-
-  lg (64):
-  container row g
-  content lg g
-
-  xl (96):
-  main gy
-  container gx
-  content lg p
-
-  */
-
   /* Font sizes -------------------------------------------------------------------------------------------------------------------------- */
   --icon-size: 1.45em;
   --body-sm--font-size: 17.5px;
@@ -174,7 +145,7 @@
   --container-*: initial;
   --container-narrow: 56rem;
   --container-base: 91.5rem;
-  --container-content: 61ch;
+  --container-content: 63ch;
 
   /* Elevation --------------------------------------------------------------------------------------------------------------------------*/
 

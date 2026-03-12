@@ -83,6 +83,8 @@
                 x-ref="panelWrapper"
                 @click="toggleDrawer"
                 class="relative h-full w-full flex {{ drawerAlignmentStyles }}">
+
+                {# Actual panel #}
                 <div
                     x-show="drawerOpen"
                     x-transition:enter="{{ durationEnter }}"
@@ -90,7 +92,7 @@
                     x-transition:leave="{{ durationLeave }}"
                     x-transition:leave-end="{{ transitionStyles }}"
                     x-trap.noscroll.inert="drawerOpen"
-                    @click.stop
+                    @click.stop = "$event.target.tagName.toLowerCase() === 'a' && toggleDrawer"
                     class="flex flex-col {{ panelStyles }} {{ panelAlignmentStyles }}">
                     {% if props.closeButton %}
                         {{ button(props.triggerProps | assign({toggleValue: "drawerOpen"}), {class:"w-full", "@click": "toggleDrawer", "x-ref":"trigger"}) }}

@@ -94,11 +94,11 @@
                     {% set show %}{{ props.toggleValue }} == false {% endset %}
                     {{ icon({glyph:props.icon.off}, {"x-show":show}) }}
                     {% set show %}{{ props.toggleValue }} == true {% endset %}
-                    {{ icon({glyph:props.icon.on}, {"x-show":show}) }}
+                    {{ icon({glyph:props.icon.on}, {"x-show":show, "x-cloak": true}) }}
                 {% endif %}
                 {% if props.label %}
-                    <span x-show="!{{ props.toggleValue }}" class="">{{ props.label.off }}</span>
-                    <span x-show="{{ props.toggleValue }}" class="">{{ props.label.on }}</span>
+                    <span x-show="!{{ props.toggleValue }}">{{ props.label.off }}</span>
+                    <span x-show="{{ props.toggleValue }}" x-cloak>{{ props.label.on }}</span>
                 {% endif %}
             </span>
         {% else %}

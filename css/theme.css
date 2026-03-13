@@ -201,8 +201,11 @@
 
   /* Animations ------------------------------------------------------------------------------------------------------------------------ */
 
+  --ease-*: initial;
   --default-transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
   --default-transition-duration: 100ms;
+  --ease-out: cubic-bezier(0.25, 0, 0.75, 0.25);
+  --ease-in: cubic-bezier(0.25, 0.75, 0.75, 1);
   --animate-marquee: marquee var(--animate-duration, 1s) infinite linear;
   --animate-spin: spin var(--animate-duration, 1s) infinite linear;
   --animate-wave: wave var(--animate-duration, 1s) infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
